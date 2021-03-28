@@ -8,7 +8,7 @@
 ======= <br>
 15 часть сервиса обмена картинками. Проект реализован как практическое задание от Yandex.Praktikum.
 Ссылки:
-[https://api.express-mesto-apik.nomoredomains.icu](https://api.express-mesto-apik.nomoredomains.icu "https://api.express-mesto-apik.nomoredomains.icu")
+[https://api.express-mesto-apik.nomoredomains.icu](https://api.express-mesto-apik.nomoredomains.icu "https://api.express-mesto-apik.nomoredomains.icu")<br>
 [https://express-mesto-apik.nomoredomains.icu](https://express-mesto-apik.nomoredomains.icu "https://express-mesto-apik.nomoredomains.icu")
 
 **Используется:**<br>
