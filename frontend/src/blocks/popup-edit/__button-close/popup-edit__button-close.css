@@ -1,0 +1,25 @@
+.popup-edit__button-close{
+    background-image: url(../../../images/Closeicon.svg);
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: -45px;
+    right: -35px;
+    cursor: pointer;
+    outline: none;
+}
+
+.popup-edit__button-close:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+    .popup-edit__button-close {
+        right: 0px;
+        background-size: contain;
+        width: 35px;
+    }
+}

@@ -1,0 +1,9 @@
+.auth-form-input{
+    padding-bottom: 13px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    margin-bottom: 30px;
+    color: white;
+}
+

@@ -1,0 +1,9 @@
+.element__like-counter{
+    background-color: transparent;
+    border: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    grid-area: c;
+    justify-self: center;
+}

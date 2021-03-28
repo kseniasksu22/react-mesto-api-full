@@ -13,7 +13,7 @@ const getCards = (req, res, next) => {
 const createCard = (req, res) => {
   const { name, link } = req.body;
   cardModel
-    .create({ name, link, creator: req.user._id })
+    .create({ name, link, creator: req.user })
     .then((cards) => {
       res.send({ data: cards });
     })
@@ -56,7 +56,7 @@ const likeCard = (req, res) => {
         res.status(404).send({ message: "Ресурс не найден" });
         return;
       }
-      res.send({ likes: card });
+      res.send(card);
     })
     .catch((error) => {
       if (error.name === "CastError") {
@@ -78,7 +78,7 @@ const dislikeCard = (req, res) => {
       if (!card) {
         res.status(404).send({ message: "Карточка не найдена" });
       }
-      res.send({ likes: card });
+      res.send(card);
     })
     .catch((error) => {
       if (error.name === "CastError") {

@@ -1,0 +1,35 @@
+.auth-form__text{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 15px 0px 0px 0px;
+}
+
+@media screen and (max-width: 380px) {
+    .auth-form__text{
+        font-size: 14px;
+        line-height: 17px;
+        margin: 20px 0px 40px 0px;
+    }
+}
+.auth-form__button-redirect{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-decoration: none;
+}
+.auth-form__button-redirect:hover{
+    opacity:0.6;
+}

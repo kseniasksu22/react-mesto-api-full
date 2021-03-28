@@ -1,6 +1,7 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
-const helmet = require("helmet");
+
 const rateLimit = require("express-rate-limit");
 const { errors } = require("celebrate");
 require("dotenv").config();
@@ -15,11 +16,28 @@ const { requestLogger, errorLogger } = require("./middlewares/logger");
 const auth = require("./middlewares/auth");
 
 const app = express();
-const PORT = 3006;
+const PORT = 3000;
+
+const options = {
+  origin: [
+    "http://localhost:3000",
+    "https://express-mesto-apik.nomoredomains.icu",
+    "http://express-mesto-apik.nomoredomains.icu",
+    "https://api.express-mesto-apik.nomoredomains.icu",
+    "http://api.express-mesto-apik.nomoredomains.icu",
+    "https://github.com/kseniasksu22/react-mesto-api-full.git",
+
+  ],
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ["Content-Type", "origin", "Authorization"],
+  credentials: true,
+};
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 200
+  max: 20000
 });
 
 const usersRouter = require("./routes/users.js");
@@ -35,13 +53,18 @@ mongoose
   .then(() => {
     console.log("database");
   });
+app.use("*", cors(options));
 app.use(limiter);
-app.use(helmet());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
 app.post("/signin", loginValidator, login);
 app.post("/signup", validateUser, createUser);
 app.use("/", auth, usersRouter);

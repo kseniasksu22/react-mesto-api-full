@@ -1,0 +1,25 @@
+    .popup-edit__button{
+        width: 358px;
+    height: 50px;
+    background-color: #000000;
+    border-radius: 2px;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    margin: 43px 36px 36px 36px;
+}
+@media screen and (max-width: 768px) {
+    .popup-edit__button {
+        font-size: 14px;
+        height: 35px;
+        line-height: 17px;
+        width: 245px;
+        align-self: center;
+    }
+}
+.popup-edit__button:hover {
+    opacity: 0.6;
+}

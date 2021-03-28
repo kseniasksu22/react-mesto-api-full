@@ -1,0 +1,24 @@
+.popup-form{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 195px;
+    visibility: hidden; 
+    opacity: 0; 
+    transition: visibility 0.6s, opacity 0.6s linear;
+    -webkit-transition: visibility 0.6s, opacity 0.6s linear;
+    -moz-transition: visibility 0.6s, opacity 0.6s linear;
+    -ms-transition: visibility 0.6s, opacity 0.6s linear;
+    -o-transition: visibility 0.6s, opacity 0.6s linear;
+
+}
+
+@media screen and (max-width: 768px) {
+    .popup-form{
+        padding-top: 123px;
+    }
+}

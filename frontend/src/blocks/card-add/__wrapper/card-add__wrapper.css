@@ -1,0 +1,17 @@
+.card-add__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .card-add__wrapper {
+        width: 240px;
+    }
+}

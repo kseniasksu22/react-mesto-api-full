@@ -1,0 +1,8 @@
+.element__wrapper {
+    padding: 20px 21px 10px 21px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:"a b"
+     "a c";
+     justify-content: space-between;
+}

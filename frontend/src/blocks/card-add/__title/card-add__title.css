@@ -1,0 +1,15 @@
+.card-add__title {
+    padding-bottom: 54px;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 24px;
+    margin: 34px 36px 0px 36px;
+}
+
+@media screen and (max-width: 768px) {
+    .card-add__title {
+        padding-bottom: 36px;
+        font-size: 18px;
+        margin: 30px 22px 0px 22px;
+    }
+}

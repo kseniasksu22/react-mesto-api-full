@@ -1,0 +1,20 @@
+.profile__button{
+    width: 120px;
+    min-height: 120px;
+    cursor: pointer;
+    background-image: url(../../../images/Pen.svg);
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;  
+    z-index: 2;
+    outline: none;
+    border: none;
+    background-color:  rgba(0, 0, 0, 0.8);
+    padding: 0px;
+    position: absolute;
+}
+
+.profile__button:hover{
+    opacity: unset;
+}

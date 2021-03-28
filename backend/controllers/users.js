@@ -13,12 +13,12 @@ const getUsers = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  User.findById(req.user.id)
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         res.status(400).send({ message: "Неккоректные данные" });
       }
-      return res.send({ user: user });
+      return res.send({ data: user });
     })
     .catch(next);
 };
@@ -71,7 +71,7 @@ const createUser = (req, res, next) => {
       // eslint-disable-next-line max-len
       res.status(201).send(
         {
-          name: user.name, about: user.about, avatar: user.avatar, email: user.email
+          data: user
         }
       );
     })
@@ -132,7 +132,7 @@ const login = (req, res, next) => {
         NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
         { expiresIn: "7d" },
       );
-      res.status(201).send(token);
+      res.status(201).send({ token: token });
     })
     .catch(next);
 };

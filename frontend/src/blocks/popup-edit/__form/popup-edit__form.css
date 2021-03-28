@@ -1,0 +1,15 @@
+.popup-edit__form{
+    display:flex;
+    flex-direction: column;
+    width: 430px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+}
+@media screen and (max-width: 768px) {
+    .popup-edit__form {
+        width: 282px;
+    }
+}
