@@ -231,7 +231,7 @@ function App() {
         setIsConfirmPopupOpen({
           isOpen: true,
           popupImg: rejectIcon,
-          popupText: "Что-то пошло не так! Попробуйте ещё раз." + err,
+          popupText: "Что-то пошло не так! Попробуйте ещё раз.",
         });
       });
   }

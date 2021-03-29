@@ -7,6 +7,8 @@
 
 ======= <br>
 15 часть сервиса обмена картинками. Проект реализован как практическое задание от Yandex.Praktikum.
+Паблик айпи: <br>
+178.154.215.7
 Ссылки:
 [https://api.express-mesto-apik.nomoredomains.icu](https://api.express-mesto-apik.nomoredomains.icu "https://api.express-mesto-apik.nomoredomains.icu")
 [https://express-mesto-apik.nomoredomains.icu](https://express-mesto-apik.nomoredomains.icu "https://express-mesto-apik.nomoredomains.icu")

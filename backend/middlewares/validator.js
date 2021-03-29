@@ -52,6 +52,8 @@ const validateUser = celebrate({
   }),
 });
 
+
+
 module.exports = {
   cardValidator,
   userInfoValidalidator,

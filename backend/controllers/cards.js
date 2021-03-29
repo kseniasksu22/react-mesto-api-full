@@ -1,5 +1,10 @@
 const cardModel = require("../models/card");
 
+const NotFoundErr = require("../errors/NotFoundErr");
+const BadRequestErr = require("../errors/BadRequestErr");
+const ServerErr = require("../errors/ServerErr");
+const ForbiddenErr = require("../errors/ForbiddenErr");
+
 const getCards = (req, res, next) => {
   cardModel
     .find({})
@@ -19,9 +24,9 @@ const createCard = (req, res) => {
     })
     .catch((error) => {
       if (error.name === "ValidationError") {
-        res.status(404).send({ message: "Некорректный Url или название" });
+        throw new BadRequestErr("Некорректный Url или название");
       } else {
-        res.status(500).send({ message: "Ошибка сервера" });
+        throw new ServerErr("Ошибка сервера");
       }
     });
 };
@@ -31,15 +36,15 @@ const deleteCard = (req, res, next) => {
     .findById(req.params.cardId)
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Карточка не найдена" });
+        throw new NotFoundErr("Карточка не найдена");
       }
 
       if (card.creator.toString() !== req.user._id) {
-        res.status(404).send({ message: "Невозможно удалить чужую карточку" });
+        throw new ForbiddenErr("Невозможно удалить чужую карточку");
       }
       cardModel.findByIdAndRemove(req.params.cardId)
         .then(() => {
-          res.send({ message: "Карточка удалена" });
+          return res.send({ message: "Карточка удалена" });
         });
     }).catch(next);
 };
@@ -53,16 +58,15 @@ const likeCard = (req, res) => {
     )
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Ресурс не найден" });
-        return;
+        throw new NotFoundErr("Карточка не найдена");
       }
       res.send(card);
     })
     .catch((error) => {
       if (error.name === "CastError") {
-        res.status(400).send({ message: "Неккоректные данные" });
+        throw new BadRequestErr("Неккоректные данные");
       } else {
-        res.status(500).send({ message: "Ошибка сервера" });
+        throw new ServerErr("Ошибка сервера");
       }
     });
 };
@@ -76,15 +80,15 @@ const dislikeCard = (req, res) => {
     )
     .then((card) => {
       if (!card) {
-        res.status(404).send({ message: "Карточка не найдена" });
+        throw new NotFoundErr("Карточка не найдена");
       }
       res.send(card);
     })
     .catch((error) => {
       if (error.name === "CastError") {
-        res.status(400).send({ message: "Неккоректные данные" });
+        throw new BadRequestErr("Неккоректные данные");
       } else {
-        res.status(500).send({ message: "Ошибка сервера" });
+        throw new ServerErr("Ошибка сервера");
       }
     });
 };

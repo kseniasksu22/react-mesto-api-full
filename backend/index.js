@@ -12,7 +12,7 @@ const {
 } = require("./controllers/users");
 const { loginValidator, validateUser } = require("./middlewares/validator");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
-
+const NotFoundErr = require("./errors/NotFoundErr");
 const auth = require("./middlewares/auth");
 
 const app = express();
@@ -60,11 +60,6 @@ app.use(parser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 
-app.get("/crash-test", () => {
-  setTimeout(() => {
-    throw new Error("Сервер сейчас упадёт");
-  }, 0);
-});
 app.post("/signin", loginValidator, login);
 app.post("/signup", validateUser, createUser);
 app.use("/", auth, usersRouter);
@@ -74,9 +69,10 @@ app.use("/", auth, cardsRouter);
 app.use(errorLogger);
 app.use(errors());
 
-app.use((req, res) => {
-  res.status(404).send({ message: "Запрашиваемый ресурс не найден" });
+app.all("/*", () => {
+  throw new NotFoundErr("Запрашиваемый ресурс не найден");
 });
+
 app.use((err, req, res) => {
   const { statusCode = 500, message } = err;
 

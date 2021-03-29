@@ -80,7 +80,7 @@ export class Api {
   }
 
   putLike(id, token) {
-    const respon = fetch(`${this._url}cards/likes/${id}`, {
+    const respon = fetch(`${this._url}cards/${id}/likes`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ export class Api {
   }
 
   deleteLike(id, token) {
-    const respon = fetch(`${this._url}cards/likes/${id}`, {
+    const respon = fetch(`${this._url}cards/${id}/likes`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${token}`,

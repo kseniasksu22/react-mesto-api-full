@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { celebrate, Joi } = require("celebrate");
 const {
   getUsers,
   getuser,
@@ -12,7 +13,11 @@ const { userInfoValidalidator, avatarValidator } = require("../middlewares/valid
 
 router.get("/users", getUsers);
 router.get("/users/me", getCurrentUser);
-router.get("/users/:userId", getuser);
+router.get("/users/:userId", celebrate({
+  params: Joi.object().keys({
+    userId: Joi.string().alphanum().length(24)
+  }),
+}), getuser);
 router.patch("/users/me", userInfoValidalidator, updateUserInfo);
 router.patch("/users/me/avatar", avatarValidator, updateUserAvatar);
 router.post("/signin", login);
