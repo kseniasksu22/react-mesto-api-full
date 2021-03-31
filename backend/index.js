@@ -66,25 +66,21 @@ app.use("/", auth, usersRouter);
 
 app.use("/", auth, cardsRouter);
 
+app.use("*", () => {
+  throw new NotFoundErr("Страница не найдена");
+});
+
 app.use(errorLogger);
 app.use(errors());
 
-app.all("/*", () => {
-  throw new NotFoundErr("Запрашиваемый ресурс не найден");
+app.use((err, req, res, next) => {
+  if (err.statusCode) {
+    res.status(err.statusCode).send({ message: err.message });
+  } else {
+    res.status(500).send({ message: "На сервере произошла ошибка" });
+  }
+  next();
 });
-
-app.use((err, req, res) => {
-  const { statusCode = 500, message } = err;
-
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? "На сервере произошла ошибка"
-        : message
-    });
-});
-
 app.listen(PORT, () => {
   console.log(`app listen on ${PORT}`);
 });

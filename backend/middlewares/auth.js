@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
   } catch (err) {
     return res
       .status(401)
-      .send({ message: authorization });
+      .send({ message: "Необходима авторизация" });
   }
 
   req.user = payload;

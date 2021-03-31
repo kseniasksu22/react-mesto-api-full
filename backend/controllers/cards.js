@@ -1,5 +1,4 @@
 const cardModel = require("../models/card");
-
 const NotFoundErr = require("../errors/NotFoundErr");
 const BadRequestErr = require("../errors/BadRequestErr");
 const ServerErr = require("../errors/ServerErr");
@@ -15,7 +14,7 @@ const getCards = (req, res, next) => {
     .catch(next);
 };
 
-const createCard = (req, res) => {
+const createCard = (req, res, next) => {
   const { name, link } = req.body;
   cardModel
     .create({ name, link, creator: req.user })
@@ -28,7 +27,7 @@ const createCard = (req, res) => {
       } else {
         throw new ServerErr("Ошибка сервера");
       }
-    });
+    }).catch(next);
 };
 
 const deleteCard = (req, res, next) => {
@@ -45,11 +44,11 @@ const deleteCard = (req, res, next) => {
       cardModel.findByIdAndRemove(req.params.cardId)
         .then(() => {
           return res.send({ message: "Карточка удалена" });
-        });
+        }).catch(next);
     }).catch(next);
 };
 
-const likeCard = (req, res) => {
+const likeCard = (req, res, next) => {
   cardModel
     .findByIdAndUpdate(
       req.params.cardId,
@@ -60,36 +59,27 @@ const likeCard = (req, res) => {
       if (!card) {
         throw new NotFoundErr("Карточка не найдена");
       }
-      res.send(card);
+      res.status(200).send(card);
     })
     .catch((error) => {
-      if (error.name === "CastError") {
-        throw new BadRequestErr("Неккоректные данные");
-      } else {
-        throw new ServerErr("Ошибка сервера");
-      }
+      next(error);
     });
 };
 
-const dislikeCard = (req, res) => {
-  cardModel
-    .findByIdAndUpdate(
-      req.params.cardId,
-      { $pull: { likes: req.user._id } },
-      { new: true }
-    )
+const dislikeCard = (req, res, next) => {
+  cardModel.findByIdAndUpdate(
+    req.params.cardId,
+    { $pull: { likes: req.user._id } },
+    { new: true },
+  )
     .then((card) => {
       if (!card) {
         throw new NotFoundErr("Карточка не найдена");
       }
-      res.send(card);
+      return res.status(200).send(card);
     })
     .catch((error) => {
-      if (error.name === "CastError") {
-        throw new BadRequestErr("Неккоректные данные");
-      } else {
-        throw new ServerErr("Ошибка сервера");
-      }
+      next(error);
     });
 };
 

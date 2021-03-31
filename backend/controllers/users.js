@@ -28,7 +28,7 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
-const getuser = (req, res) => {
+const getuser = (req, res, next) => {
   User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
@@ -37,12 +37,12 @@ const getuser = (req, res) => {
       res.status(200).send({ user: user });
     })
     .catch((error) => {
-      if (error.name === "CastError") {
-        throw new NotFoundErr("Неккоректные данные");
+      if (error.statusCode === 404) {
+        throw new NotFoundErr("Пользователя с таким id не найдено");
       } else {
         throw new ServerErr("Ошибка сервера");
       }
-    });
+    }).catch(next);
 };
 
 const createUser = (req, res, next) => {
@@ -83,7 +83,7 @@ const createUser = (req, res, next) => {
     .catch(next);
 };
 
-const updateUserInfo = (req, res) => {
+const updateUserInfo = (req, res, next) => {
   const { name, about } = req.body;
   console.log(req.body);
   User.findByIdAndUpdate(
@@ -103,10 +103,10 @@ const updateUserInfo = (req, res) => {
       } else {
         throw new ServerErr("Ошибка сервера");
       }
-    });
+    }).catch(next);
 };
 
-const updateUserAvatar = (req, res) => {
+const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
@@ -122,7 +122,7 @@ const updateUserAvatar = (req, res) => {
       } else {
         throw new ServerErr("Ошибка сервера");
       }
-    });
+    }).catch(next);
 };
 
 const login = (req, res, next) => {
